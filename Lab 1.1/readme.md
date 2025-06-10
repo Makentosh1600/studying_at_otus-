@@ -1,4 +1,9 @@
 # Лабораторная работа. Базовая настройка коммутатора 
 **Топология**  
 
-![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.1/JPG/B1.jpg)
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.1/JPG/B1.jpg)  
+
+| Устройство | Интерфейс |     IP-адрес / префикс     |  
+|   **S1**   |   VLAN1   | 192.168.1.2  255.255.255.0 |  
+|  **PC-A**  |    NIC    | 192.168.1.10 255.255.255.0 |
+
