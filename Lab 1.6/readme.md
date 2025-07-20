@@ -5,7 +5,8 @@
 
    **Таблица адресации**    
 ![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.6/JPG/02.png)   
-**Таблица VLAN**
+**Таблица VLAN**    
+
 ![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.6/JPG/03.png)
 
 **Задачи**  
@@ -65,7 +66,8 @@ f.	Зашифруйте открытые пароли.
 g.	Создайте баннер с предупреждением о запрете несанкционированного доступа к устройству.    
 h.	Настройте на коммутаторах время.    
 i.	Сохранение текущей конфигурации в качестве начальной.   
-**НА ПРИМЕРЕ S1** 
+**НА ПРИМЕРЕ S1**     
+
 *Switch(config)#hostname S1*   
 *S1(config)#no ip domain-lookup*   
 *S1(config)#service password-encryption*   
