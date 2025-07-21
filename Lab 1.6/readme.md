@@ -134,7 +134,12 @@ b.	Убедитесь, что VLAN назначены на правильные 
 *S2(config-if)#ip default-gateway 192.168.10.1*   
 *S2(config)#exit*  
 *S2#show vlan br*  
-![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.6/JPG/04.png)     
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.6/JPG/04.png)       
+**ДОПОЛНЕНИЕ ПО ЗАМЕЧАНИЮ**     
+*R1(config)#interf g0/1.1000*   
+*R1(config-subif)#*   
+*R1(config-subif)#encapsulation dot1Q 1000 native*   
+
 ## Часть 3. Конфигурация магистрального канала стандарта 802.1Q между коммутаторами   
 В части 3 вы вручную настроите интерфейс F0/1 как транк.   
 ### Шаг 1. Вручную настройте магистральный интерфейс F0/1 на коммутаторах S1 и S2.   
