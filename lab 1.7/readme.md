@@ -1,5 +1,6 @@
 # Лабораторная работа. Развертывание коммутируемой сети с резервными каналами  
-**Топология** 
+**Топология**    
+
 ![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.7/JPG/01.png)   
    **Таблица адресации**     
 ![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.7/JPG/02.png)   
@@ -63,10 +64,12 @@ a few minutes.*
 *-Да.*    
 ![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.7/JPG/03.png)    
 **Вопрос. Успешно ли выполняется эхо-запрос от коммутатора S1 на коммутатор S3?**   
-*-Да.*
+*-Да.*   
+
 ![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.7/JPG/04.png)   
 **Вопрос. Успешно ли выполняется эхо-запрос от коммутатора S2 на коммутатор S3?**    
-*-Да.* 
+*-Да.*    
+
 ![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.7/JPG/05.png)   
 ## Часть 2:	Определение корневого моста
 ### Шаг 1: Отключите все порты на коммутаторах.   
