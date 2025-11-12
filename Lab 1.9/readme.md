@@ -180,9 +180,9 @@ exit
 ```
 ---
 
-## 📝 ЧАСТЬ 3: Реализация комплексных функций безопасности
+## ЧАСТЬ 3: Реализация комплексных функций безопасности
 
-### 3.1 Конфигурация магистральных соединений (Trunk — 802.1Q)
+### 3.1 Конфигурация магистральных соединений 
 
 На обоих коммутаторах настройте интерфейс F0/1:
 
@@ -201,35 +201,16 @@ exit
 exit
 ```
 
-**Объяснение команд:**
-- `switchport mode trunk` — переводит портв в режим trunk
-- `switchport trunk native vlan 333` — устанавливает native VLAN 333
-- `switchport trunk allowed vlan 10,333,999` — разрешает только указанные VLAN
-- `switchport nonegotiate` — отключает согласование DTP (Dynamic Trunking Protocol)
-
-### 3.2 Проверка конфигурации trunk
+### Проверка конфигурации trunk
 
 На обоих коммутаторах:
 
 ```cisco
 show interface trunk
 ```
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.9/JPG/04.png)    
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.9/JPG/05.png)    
 
-**Ожидаемый результат:**
-
-```
-Port      Mode         Encapsulation  Status      Native VLAN
-Fa0/1     on           802.1q         trunking    333
-
-Port Vlans allowed on trunk
-Fa0/1     10,333,999
-
-Port Vlans allowed and active
-Fa0/1     1,10,333,999
-
-Port Vlans in STP forwarding
-Fa0/1     1,10,333,999
-```
 
 ### 3.3 Проверка отключения DTP
 
@@ -243,15 +224,16 @@ show interfaces F0/1 switchport | include Negotiation
 ```
 Negotiation of Trunking: Off
 ```
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.9/JPG/06.png)   
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.9/JPG/07.png)   
 
-### 3.4 Настройка портов доступа (Access Ports)
+### 3.2 Настройка портов доступа 
 
 **На S1:**
 
 ```cisco
 configure terminal
 
-! Портал доступа F0/5 для R1
 interface F0/5
 switchport mode access
 switchport access vlan 10
@@ -259,7 +241,6 @@ description Link to R1
 no shutdown
 exit
 
-! Портал доступа F0/6 для PC-A
 interface F0/6
 switchport mode access
 switchport access vlan 10
@@ -275,7 +256,6 @@ exit
 ```cisco
 configure terminal
 
-! Портал доступа F0/18 для PC-B
 interface F0/18
 switchport mode access
 switchport access vlan 10
@@ -286,7 +266,7 @@ exit
 exit
 ```
 
-### 3.5 Обеспечение безопасности неиспользуемых портов
+### 3.3 Обеспечение безопасности неиспользуемых портов
 
 Неиспользуемые порты должны быть перемещены в VLAN 999 (ParkingLot) и отключены.
 
