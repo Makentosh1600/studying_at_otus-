@@ -302,10 +302,12 @@ copy running-config startup-config
 
 #### 2.3 Проверка конфигурации DHCP
 
-show ip dhcp pool
+show ip dhcp pool   
+
 ![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.8/JPG/08.png)
 
-show ip dhcp binding  
+show ip dhcp binding     
+
 ![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.8/JPG/09.png)  
 
 show ip dhcp server statistics (команда в Packet Trace не подкрживается)
@@ -315,10 +317,12 @@ show ip dhcp server statistics (команда в Packet Trace не подкрж
 
 **На компьютере PC-A:**
 
-ipconfig
+ipconfig   
+
 ![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.8/JPG/10.png)  
 
-ping 192.168.1.1
+ping 192.168.1.1   
+
 ![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.8/JPG/11.png) 
 
 ---
@@ -342,16 +346,19 @@ copy running-config startup-config
 
 **На компьютере PC-B:**
 
-ipconfig
+ipconfig   
+
 ![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.8/JPG/12.png)   
 
-ping 192.168.1.1
+ping 192.168.1.1   
+
 ![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.8/JPG/13.png) 
 
 
 #### 3.3 Проверка DHCP на R1
 
-show ip dhcp binding
+show ip dhcp binding   
+
 ![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.8/JPG/14.png) 
 
 show ip dhcp server statistics (команда в Packet Trace не подкрживается)
