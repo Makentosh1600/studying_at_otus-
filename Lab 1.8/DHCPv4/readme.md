@@ -112,7 +112,7 @@ exit
 
 **На R1:**
 ```
-interface G0/0/0
+interface G0/0
 ip address 10.0.0.1 255.255.255.252
 no shutdown
 exit
@@ -120,18 +120,18 @@ exit
 
 **На R2:**
 ```
-interface G0/0/0
+interface G0/0
 ip address 10.0.0.2 255.255.255.252
 no shutdown
 exit
 
-interface G0/0/1
+interface G0/1
 ip address 192.168.1.97 255.255.255.240
 no shutdown
 exit
 ```
 
-#### 1.6 Настройка статической маршрутизации
+#### Настройка статической маршрутизации
 
 **На R1:**
 ```
@@ -143,12 +143,12 @@ ip route 0.0.0.0 0.0.0.0 10.0.0.2
 ip route 0.0.0.0 0.0.0.0 10.0.0.1
 ```
 
-#### 1.7 Проверка маршрутизации
+#### Проверка маршрутизации
 ```
 ping 192.168.1.97
 ```
-
-#### 1.8 Базовая конфигурация коммутаторов (S1 и S2)
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.8/JPG/06.png)
+#### 1.6 Базовая конфигурация коммутаторов (S1 и S2)
 
 *Аналогично маршрутизаторам:*
 ```
@@ -169,17 +169,20 @@ banner motd #WARNING: Unauthorized access is prohibited!#
 hostname S1
 exit
 copy running-config startup-config
+
+clock set 12:00:00 12 November 2025
+
 ```
 
-#### 1.9 Создание VLAN на S1
+#### 1.7 Создание VLAN на коммутаторе S1
 
 ```
 vlan 100
-name Clients
+name Clients_VLAN
 exit
 
 vlan 200
-name Management
+name Management_VLAN
 exit
 
 vlan 999
@@ -191,7 +194,7 @@ name Native
 exit
 ```
 
-#### 1.10 Настройка интерфейса управления на S1
+#### Настройка интерфейса управления на S1
 
 ```
 interface vlan 200
@@ -202,7 +205,7 @@ exit
 ip default-gateway 192.168.1.65
 ```
 
-#### 1.11 Настройка интерфейса управления на S2
+#### Настройка интерфейса управления на S2
 
 ```
 interface vlan 1
@@ -213,7 +216,7 @@ exit
 ip default-gateway 192.168.1.97
 ```
 
-#### 1.12 Назначение VLAN портам и настройка trunk на S1
+#### Назначение VLAN портам и настройка trunk на S1
 
 ```
 interface F0/6
@@ -236,7 +239,7 @@ no shutdown
 exit
 ```
 
-#### 1.13 Назначение VLAN портам на S2
+#### Назначение VLAN портам на S2
 
 ```
 interface F0/18
@@ -259,7 +262,12 @@ show interfaces trunk
 
 ---
 
-### Часть 2: Настройка и проверка DHCPv4 на R1
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.8/JPG/07.png)
+
+Почему интерфейс F0/5 указан в VLAN1? - По умолчанию всем портам присваивается VLAN1
+Какой IP-адрес был бы у ПК, если бы он был подключен к сети с помощью DHCP? - Первый свободный из таблицы возможных на сервере DHCP
+
+### Часть 2: Настройка и проверка двух серверов DHCPv4 на R1
 
 #### 2.1 Создание пула DHCP для подсети A
 
@@ -272,7 +280,7 @@ ip dhcp pool R1_Client_LAN
 network 192.168.1.0 255.255.255.192
 default-router 192.168.1.1
 domain-name CCNA-lab.com
-lease 2 12 30
+lease 2 12 30 (команда в Packet Trace не подкрживается)
 exit
 ```
 
@@ -285,7 +293,7 @@ ip dhcp pool R2_Client_LAN
 network 192.168.1.96 255.255.255.240
 default-router 192.168.1.97
 domain-name CCNA-lab.com
-lease 2 12 30
+lease 2 12 30 (команда в Packet Trace не подкрживается)
 exit
 
 exit
