@@ -296,26 +296,15 @@ exit
 exit
 ```
 
-### 3.6 Проверка конфигурации портов
+### Проверка конфигурации портов
 
 На обоих коммутаторах:
 
 ```cisco
 show interfaces status
 ```
-
-**Ожидаемый результат:**
-
-```
-Port     Name              Status     Vlan    Duplex Speed Type
-Fa0/1    Link to S2        connected  trunk   a-full a-100 10/100BaseTX
-Fa0/2    disabled          999        auto    auto   10/100BaseTX
-Fa0/3    disabled          999        auto    auto   10/100BaseTX
-...
-Fa0/5    Link to R1        connected  10      a-full a-100 10/100BaseTX
-Fa0/6    Link to PC-A      connected  10      a-full a-100 10/100BaseTX
-...
-```
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.9/JPG/08.png)   
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.9/JPG/09.png)   
 
 ---
 
