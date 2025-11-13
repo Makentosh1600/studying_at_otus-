@@ -268,14 +268,11 @@ exit
 
 ### 3.3 Обеспечение безопасности неиспользуемых портов
 
-Неиспользуемые порты должны быть перемещены в VLAN 999 (ParkingLot) и отключены.
-
 **На S1:**
 
 ```cisco
 configure terminal
 
-! Отключение диапазона неиспользуемых портов
 interface range F0/2-4, F0/7-24, G0/1-2
 switchport mode access
 switchport access vlan 999
@@ -290,7 +287,6 @@ exit
 ```cisco
 configure terminal
 
-! Отключение диапазона неиспользуемых портов
 interface range F0/2-17, F0/19-24, G0/1-2
 switchport mode access
 switchport access vlan 999
