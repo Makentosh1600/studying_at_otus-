@@ -4,9 +4,7 @@
 
 ## Топология
 
-![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.9/JPG/01.png)    
 ![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.9/JPG/01.png)   
-
 
 ---
 
@@ -37,7 +35,8 @@
 ## ЧАСТЬ 1: Настройка основных параметров
 
 ### 1.1 Построение физической топологии
-![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.9/JPG/02.png) 
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.9/JPG/02.png) 
+
 
 ### 1.2 Настройка маршрутизатора R1
 
