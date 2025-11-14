@@ -3,7 +3,8 @@
 ---
 
 ## Топология
-![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.9/JPG/01.png)   
+
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.9/JPG/01.png)    
 
 ---
 
