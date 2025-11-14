@@ -83,8 +83,7 @@ exit
 ```
 R1# show ip interface brief
 ```
-![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.9/JPG/03.png) 
-
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.9/JPG/03.png)  
 
 ### 1.3 Базовая конфигурация коммутаторов S1 и S2
 
@@ -210,9 +209,8 @@ exit
 ```cisco
 show interface trunk
 ```
-![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.9/JPG/04.png)    
-![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.9/JPG/05.png)    
-
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.9/JPG/04.png)  
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.9/JPG/05.png)       
 
 ### 3.3 Проверка отключения DTP
 
@@ -226,8 +224,10 @@ show interfaces F0/1 switchport | include Negotiation
 ```
 Negotiation of Trunking: Off
 ```
-![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.9/JPG/06.png)   
-![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.9/JPG/07.png)   
+
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.9/JPG/06.png)     
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.9/JPG/07.png)     
+
 
 ### 3.2 Настройка портов доступа 
 
@@ -305,8 +305,9 @@ exit
 ```cisco
 show interfaces status
 ```
-![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.9/JPG/08.png)   
-![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.9/JPG/09.png)   
+ 
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.9/JPG/08.png)    
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.9/JPG/09.png)  
 
 ---
 
@@ -349,16 +350,14 @@ exit
 ```cisco
 show port-security interface F0/6
 ```
-![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.9/JPG/10.png)  
-
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.9/JPG/10.png)  
 
 ### Просмотр таблицы безопасных MAC-адресов
 
 ```cisco
 show port-security address
 ```
-![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.9/JPG/11.png)     
-
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.9/JPG/11.png)  
 
 ### Конфигурация Port Security на S2 F0/18 (Sticky MAC)
 
@@ -382,14 +381,14 @@ exit
 show port-security interface F0/18
 ```
 
-![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.9/JPG/12.png)    
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.9/JPG/12.png)  
 
 ### Просмотр таблицы безопасных MAC-адресов на S2
 
 ```cisco
 show port-security address
 ```
-![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.9/JPG/13.png)     
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.9/JPG/13.png)  
 
 ---
 
@@ -416,9 +415,7 @@ exit
 ```cisco
 show ip dhcp snooping
 ```
-
-![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.9/JPG/14.png)   
-
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.9/JPG/14.png)  
 
 ### Проверка привязки DHCP Snooping на S2
 
@@ -430,7 +427,7 @@ show ip dhcp snooping binding
 **HELP!!!**   
 коммутатор S2 не пропускает запросы DHCP. Комьютер PC-B не получает IP адрес после выполнение команды ip dhcp snooping на S2. Отключает работает. Не нашел причину.
 
-![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.9/JPG/15.png)      
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.9/JPG/15.png)  
 
 ---
 
@@ -494,7 +491,8 @@ exit
 ```cisco
 show spanning-tree interface F0/6 detail
 ```
-![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.9/JPG/16.png)      
+   
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.9/JPG/16.png)  
 
 ! CPT не отображает информацию о состоянии BPDU на портах
 
@@ -507,22 +505,25 @@ show spanning-tree interface F0/6 detail
 ```cmd
 ping 192.168.10.1
 ```
-![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.9/JPG/17.png)     
+ 
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.9/JPG/17.png)  
 
 ```cmd
 ping 192.168.10.201
 ```
-![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.9/JPG/18.png)
+
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.9/JPG/18png) 
 
 ```cmd
 ping 192.168.10.10
 ```
-![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.9/JPG/19.png)
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.9/JPG/19.png) 
 
 ```cmd
 ping 10.10.1.1
 ```
-![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.9/JPG/20.png)
+ 
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.9/JPG/20.png) 
 
 ---
 
