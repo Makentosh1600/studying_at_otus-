@@ -1,4 +1,4 @@
-# Лабораторная работа - Конфигурация безопасности коммутатора
+<img width="579" height="247" alt="{5B8C73DC-59AF-4B8B-8434-449A3312F042}" src="https://github.com/user-attachments/assets/a364212d-a09c-46c1-a772-5687a5b5230c" /><img width="588" height="242" alt="{026198C3-C200-45CD-AC14-7F2DEF045FEA}" src="https://github.com/user-attachments/assets/d488c6f8-eb19-4167-82d2-13504bc6eeec" /># Лабораторная работа - Конфигурация безопасности коммутатора
 
 ---
 
@@ -308,9 +308,8 @@ show interfaces status
 
 ---
 
-## 🔐 ЧАСТЬ 3.2: Безопасность портов (Port Security)
 
-### 3.2.1 Проверка параметров безопасности портов по умолчанию
+### 3.4 Документирование и реализация функции безопасности портов
 
 На S1:
 
@@ -318,25 +317,18 @@ show interfaces status
 show port-security interface F0/6
 ```
 
-**Запишите следующие параметры:**
-
 | Параметр | Значение |
 |----------|---------|
-| Защита портов | |
-| Максимальное количество MAC-адресов | |
-| Режим нарушения | |
-| Aging Time | |
-| Aging Type | |
-| Secure Static Address Aging | |
-| Sticky MAC Address | |
+| Защита портов | Disabled |
+| Максимальное количество MAC-адресов | 1 |
+| Режим нарушения | Secure-down |
+| Aging Time | 0 mins |
+| Aging Type | Absolute |
+| Secure Static Address Aging | Disabled |
+| Sticky MAC Address | 0 |
 
-### 3.2.2 Конфигурация Port Security на S1 F0/6
+### Конфигурация Port Security на S1 F0/6
 
-**Требования:**
-- Максимальное количество MAC-адресов: **3**
-- Режим безопасности: **restrict** (запрещение нарушений)
-- Aging Time: **60 минут**
-- Aging Type: **inactivity** (по неактивности)
 
 ```cisco
 configure terminal
@@ -346,55 +338,27 @@ switchport port-security
 switchport port-security maximum 3
 switchport port-security violation restrict
 switchport port-security aging time 60
-switchport port-security aging type inactivity
+switchport port-security aging type inactivity (!!! НЕ ПОДЕРЖИВАЕТ CPT)
 exit
 
 exit
 ```
-
-### 3.2.3 Проверка Port Security на S1 F0/6
 
 ```cisco
 show port-security interface F0/6
 ```
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.9/JPG/10.png)  
 
-**Ожидаемый результат:**
 
-```
-Port Security           : Enabled
-Port Status             : Secure-up
-Violation Mode          : Restrict
-Aging Time              : 60 mins
-Aging Type              : Inactivity
-Maximum MAC Addresses   : 3
-Total MAC Addresses     : 1
-Configured MAC Addresses: 0
-Sticky MAC Addresses    : 0
-Last Source Address:Vlan: 0022.5646.3411:10
-Security Violation Count: 0
-```
-
-### 3.2.4 Просмотр таблицы безопасных MAC-адресов
+### Просмотр таблицы безопасных MAC-адресов
 
 ```cisco
 show port-security address
 ```
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.9/JPG/11.png)     
 
-**Ожидаемый результат:**
 
-```
-Secure Mac Address Table
-Vlan  Mac Address  Type            Ports   Remaining Age (mins)
-10    0022.564634 SecureDynamic   Fa0/6   60 (I)
-```
-
-### 3.2.5 Конфигурация Port Security на S2 F0/18 (Sticky MAC)
-
-**Требования:**
-- Максимальное количество MAC-адресов: **2**
-- Режим безопасности: **protect** (молчаливое отклонение)
-- Aging Time: **60 минут**
-- **Sticky MAC** (автоматическое добавление MAC-адресов в конфигурацию)
+### Конфигурация Port Security на S2 F0/18 (Sticky MAC)
 
 ```cisco
 configure terminal
@@ -410,48 +374,34 @@ exit
 exit
 ```
 
-### 3.2.6 Проверка Port Security на S2 F0/18
+### Проверка Port Security на S2 F0/18
 
 ```cisco
 show port-security interface F0/18
 ```
 
-**Ожидаемый результат:**
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.9/JPG/12.png)    
 
+### Просмотр таблицы безопасных MAC-адресов на S2
+
+```cisco
+show port-security address
 ```
-Port Security           : Enabled
-Port Status             : Secure-up
-Violation Mode          : Protect
-Aging Time              : 60 mins
-Aging Type              : Absolute
-Maximum MAC Addresses   : 2
-Total MAC Addresses     : 1
-Configured MAC Addresses: 0
-Sticky MAC Addresses    : 1
-Last Source Address:Vlan: 0022.5646.3413:10
-```
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.9/JPG/13.png)     
 
 ---
 
-## 🛡️ ЧАСТЬ 3.3: DHCP Snooping
-
-### 3.3.1 Включение DHCP Snooping на S2
+### 3.5 Включение DHCP Snooping на S2
 
 ```cisco
 configure terminal
 
-! Включение DHCP Snooping глобально
 ip dhcp snooping
-
-! Включение DHCP Snooping для VLAN 10
 ip dhcp snooping vlan 10
-
-! Конфигурация доверенных портов (trunk порты)
 interface F0/1
 ip dhcp snooping trust
 exit
 
-! Конфигурация ненадежного порта с ограничением
 interface F0/18
 ip dhcp snooping limit rate 5
 exit
@@ -459,51 +409,31 @@ exit
 exit
 ```
 
-### 3.3.2 Проверка конфигурации DHCP Snooping
+### Проверка конфигурации DHCP Snooping на S2
 
 ```cisco
 show ip dhcp snooping
 ```
 
-**Ожидаемый результат:**
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.9/JPG/14.png)   
 
-```
-Switch DHCP snooping is enabled
-DHCP snooping is configured on following VLANs:
-10
-DHCP snooping is operational on following VLANs:
-10
 
-DHCP snooping trust/rate is configured on the following Interfaces:
-Interface            Trusted  Allow option  Rate limit (pps)
-FastEthernet0/1      yes      yes           unlimited
-FastEthernet0/18     no       no            5
-```
-
-### 3.3.3 Проверка привязки DHCP Snooping
+### Проверка привязки DHCP Snooping на S2
 
 После того как PC-B получит IP-адрес через DHCP:
 
 ```cisco
 show ip dhcp snooping binding
 ```
+**HELP!!!**   
+коммутатор S2 не пропускает запросы DHCP. Комьютер PC-B не получает IP адрес после выполнение команды ip dhcp snooping на S2. Отключает работает. Не нашел причину.
 
-**Ожидаемый результат:**
-
-```
-Mac Address          IP Address      Lease(sec)  Type           VLAN  Interface
-00:50:56:90:D0:8E   192.168.10.11   86213       dhcp-snooping   10   FastEthernet0/18
-
-Total number of bindings: 1
-```
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.9/JPG/15.png)      
 
 ---
 
-## ⚡ ЧАСТЬ 3.4: PortFast и BPDU Guard
+### 3.6 Конфигурация PortFast и BPDU Guard
 
-### 3.4.1 Конфигурация PortFast на портах доступа
-
-PortFast позволяет портам, подключённым к конечным устройствам (PC, принтеры и т.д.), минимизировать время транзита в состояние forwarding.
 
 **На S1:**
 
@@ -529,9 +459,7 @@ exit
 exit
 ```
 
-### 3.4.2 Включение BPDU Guard
-
-BPDU Guard защищает сеть от петель, отключая порты при получении BPDU на PortFast портах.
+### Включение BPDU Guard
 
 **На S1:**
 
@@ -557,88 +485,46 @@ exit
 exit
 ```
 
-### 3.4.3 Проверка PortFast и BPDU Guard
+### Проверка PortFast и BPDU Guard
 
-На S1:
+**На S1:**
 
 ```cisco
 show spanning-tree interface F0/6 detail
 ```
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.9/JPG/16.png)      
 
-**Ожидаемый результат:**
-
-```
-Port 8 (FastEthernet0/6) of VLAN0010 is designated forwarding
-Port path cost 19, Port priority 128, Port Identifier 128.6.
-
-Number of transitions to forwarding state: 1
-
-The port is in the portfast mode
-Link type is point-to-point by default
-Bpdu guard is enabled
-
-BPDU: sent 128, received 0
-```
+! CPT не отображает информацию о состоянии BPDU на портах
 
 ---
 
-## ✅ Проверка сквозной связности
+### Проверка сквозной связности
+На PC-B отключен ip dhcp snooping.
 
-### Проверка IP-адресации
-
-На PC-A и PC-B выполните:
+**На PC-B:** 
+```cmd
+ping 192.168.10.1
+```
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.9/JPG/17.png)     
 
 ```cmd
-ipconfig /all
+ping 192.168.10.201
 ```
-
-**Ожидаемый результат:**
-- PC-A должен получить IP-адрес 192.168.10.x из пула DHCP
-- PC-B должен получить IP-адрес 192.168.10.x из пула DHCP
-- Шлюз по умолчанию: 192.168.10.1
-- DNS сервер: (если настроен в DHCP пуле)
-
-### Проверка связности через PING
-
-**Из PC-A пингуйте:**
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.9/JPG/18.png)
 
 ```cmd
-ping 192.168.10.1       ! Шлюз
-ping 192.168.10.202     ! S2 VLAN 10
-ping 192.168.10.11      ! PC-B
-ping 10.10.1.1          ! Loopback0 R1
+ping 192.168.10.10
 ```
-
-**Из PC-B пингуйте:**
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.9/JPG/19.png)
 
 ```cmd
-ping 192.168.10.1       ! Шлюз
-ping 192.168.10.201     ! S1 VLAN 10
-ping 192.168.10.10      ! PC-A
-ping 10.10.1.1          ! Loopback0 R1
+ping 10.10.1.1
 ```
-
-**Ожидаемый результат:** Все пакеты должны успешно доставиться.
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.9/JPG/20.png)
 
 ---
 
-## 📚 Справочная таблица команд Cisco
 
-| Команда | Назначение |
-|---------|-----------|
-| `show vlan brief` | Просмотр всех VLAN |
-| `show interface trunk` | Просмотр trunk-интерфейсов |
-| `show interfaces status` | Статус всех портов |
-| `show port-security interface [интерфейс]` | Параметры Port Security |
-| `show port-security address` | Таблица безопасных MAC-адресов |
-| `show ip dhcp snooping` | Параметры DHCP Snooping |
-| `show ip dhcp snooping binding` | Привязка DHCP Snooping |
-| `show spanning-tree interface [интерфейс] detail` | Детали Spanning Tree |
-| `show interfaces [интерфейс] switchport` | Параметры коммутационного портала |
-| `show running-config` | Текущая конфигурация |
-| `copy running-config startup-config` | Сохранение конфигурации |
-
----
 
 ## 💡 Ключевые концепции безопасности Layer 2
 
