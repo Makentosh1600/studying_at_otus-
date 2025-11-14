@@ -5,6 +5,8 @@
 ## Топология
 
 ![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/lab%201.9/JPG/01.png)    
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.9/JPG/01.png)   
+
 
 ---
 
@@ -17,7 +19,7 @@
 | **S1** | VLAN 10 | 192.168.10.201 | 255.255.255.0 |
 | **S2** | VLAN 10 | 192.168.10.202 | 255.255.255.0 |
 | **PC-A** | NIC | DHCP | 255.255.255.0 |
-| **PC-B** | NIC | DHCP | 255.255.255.0 | Тестовый
+| **PC-B** | NIC | DHCP | 255.255.255.0 |
 
 ---
 
