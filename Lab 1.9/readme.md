@@ -1,4 +1,4 @@
-<img width="579" height="247" alt="{5B8C73DC-59AF-4B8B-8434-449A3312F042}" src="https://github.com/user-attachments/assets/a364212d-a09c-46c1-a772-5687a5b5230c" /><img width="588" height="242" alt="{026198C3-C200-45CD-AC14-7F2DEF045FEA}" src="https://github.com/user-attachments/assets/d488c6f8-eb19-4167-82d2-13504bc6eeec" /># Лабораторная работа - Конфигурация безопасности коммутатора
+# Лабораторная работа - Конфигурация безопасности коммутатора
 
 ---
 
