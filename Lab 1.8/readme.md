@@ -344,19 +344,21 @@ R2# write memory
 Не удалось, т.к. PACKET TRACER НЕ ПОДЕРЖИВАЕТ  ipv6 dhcp relay
 
 ### 5.4 Настройка Stateful DHCPv6 на R2
+```
+ipv6 dhcp pool R2-STATEFUL    
+address prefix 2001:db8:acad:3:aaa::/80    
+dns-server 2001:db8:acad::254   
+domain-name STATEFUL.com    
+exit   
 
-ipv6 dhcp pool R2-STATEFUL
-address prefix 2001:db8:acad:3:aaa::/80
-dns-server 2001:db8:acad::254
-domain-name STATEFUL.com
-exit
+interface gigabitethernet 0/1   
+ipv6 dhcp server R2-STATEFUL   
+exit   
 
-interface gigabitethernet 0/1
-ipv6 dhcp server R2-STATEFUL
-exit
+end   
+write memory   
+```
 
-end
-write memory
 
 Проверьте вывод ipconfig /all и обратите внимание на изменения.
 ![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.8/JPG/20.jpg)
