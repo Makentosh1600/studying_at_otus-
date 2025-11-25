@@ -125,15 +125,15 @@ R2# configure terminal
 # Активация IPv6 маршрутизации
 R2(config)# ipv6 unicast-routing
 
-# Конфигурация G0/0/0 (Link к R1)
-R2(config)# interface gigabitethernet 0/0/0
+# Конфигурация G0/0 (Link к R1)
+R2(config)# interface gigabitethernet 0/0
 R2(config-if)# ipv6 address 2001:db8:acad:2::2/64
 R2(config-if)# ipv6 address fe80::2 link-local
 R2(config-if)# no shutdown
 R2(config-if)# exit
 
-# Конфигурация G0/0/1 (Link к PC-B)
-R2(config)# interface gigabitethernet 0/0/1
+# Конфигурация G0/1 (Link к PC-B)
+R2(config)# interface gigabitethernet 0/1
 R2(config-if)# ipv6 address 2001:db8:acad:3::1/64
 R2(config-if)# ipv6 address fe80::1 link-local
 R2(config-if)# no shutdown
@@ -227,7 +227,7 @@ R1(config-dhcp)# dns-server 2001:db8:acad::254
 R1(config-dhcp)# domain-name STATELESS.com
 R1(config-dhcp)# exit
 
-# Привязка пула к интерфейсу G0/0/1
+# Привязка пула к интерфейсу G0/1
 R1(config)# interface gigabitethernet 0/0/1
 R1(config-if)# ipv6 nd other-config-flag
 R1(config-if)# ipv6 dhcp server R1-STATELESS
@@ -290,7 +290,7 @@ R1(config-dhcp)# domain-name STATEFUL.com
 R1(config-dhcp)# exit
 
 # Назначение только что созданного пула DHCPv6 интерфейсу g0/0/0 на R1 
-R1(config)# interface gigabitethernet 0/0/0
+R1(config)# interface gigabitethernet 0/0
 R1(config-if)# ipv6 dhcp server R2-STATEFUL
 R1(config-if)# exit
 
@@ -323,13 +323,13 @@ DNS Servers.....................: ::
 
 ```
 
-### 5.2 Настройте R2 в качестве агента DHCP-ретрансляции для локальной сети на G0/0/1
+### 5.2 Настройте R2 в качестве агента DHCP-ретрансляции для локальной сети на G0/1
 
 ```bash
 R2# configure terminal
 
-# Конфигурация интерфейса G0/0/1 (сторона клиента)
-R2(config)# interface gigabitethernet 0/0/1
+# Конфигурация интерфейса G0/1 (сторона клиента)
+R2(config)# interface gigabitethernet 0/1
 R2(config-if)# ipv6 nd managed-config-flag
 R2(config-if)# ipv6 dhcp relay destination 2001:db8:acad:2::1 gigabitethernet 0/0/0
 !!! НЕ ПОДЕРЖИВАЕТ PACKET TRACER  ipv6 dhcp relay
