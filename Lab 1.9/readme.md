@@ -448,10 +448,8 @@ show ip dhcp snooping
 ```cisco
 show ip dhcp snooping binding
 ```
-**HELP!!!**   
-коммутатор S2 не пропускает запросы DHCP. Комьютер PC-B не получает IP адрес после выполнение команды ip dhcp snooping на S2. Отключает работает. Не нашел причину.
 
-![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.9/JPG/15.png)  
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.9/JPG/20.jpg)  
 
 ---
 
