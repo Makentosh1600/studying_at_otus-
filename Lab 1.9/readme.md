@@ -392,7 +392,9 @@ show port-security address
 
 ---
 
-### 3.5 Включение DHCP Snooping на S2
+### 3.5 Включение DHCP Snooping на S2 и S1
+
+Для S2:    
 
 ```cisco
 configure terminal
@@ -407,8 +409,30 @@ interface F0/18
 ip dhcp snooping limit rate 5
 exit
 
+no ip dhcp snooping information option
+
 exit
 ```
+Для S1:   
+
+```cisco
+configure terminal
+
+ip dhcp snooping
+ip dhcp snooping vlan 10
+interface F0/5
+ip dhcp snooping trust
+exit
+
+interface F0/6
+ip dhcp snooping limit rate 5
+exit
+
+no ip dhcp snooping information option
+
+exit
+```
+
 
 ### Проверка конфигурации DHCP Snooping на S2
 
