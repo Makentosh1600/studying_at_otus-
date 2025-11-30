@@ -17,8 +17,7 @@
 
 ## ЧАСТЬ 1. Создание сети и настройка основных параметров устройства
 ### 1.1 Построение физической топологии
-![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/LAB%210.1/JPG/02.jpg)    
-
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/LAB%201.10/JPG/02.jpg)
 ### 1.2 Базовая конфигурация маршрутизаторов (R1 и R2)
 
 ```
@@ -134,11 +133,9 @@ exit
 show ip ospf neighbor
 ```
 Результат для R1:
-![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/LAB%210.1/JPG/03.jpg)    
-
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/LAB%201.10/JPG/03.jpg)
 Результат для R2:
-![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/LAB%210.1/JPG/04.jpg)    
-
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/LAB%201.10/JPG/04.jpg)
 #### Контрольный вопрос
 
 **Какой маршрутизатор является DR (Designated Router)? Какой является BDR (Backup Designated Router)? Каковы критерии отбора?**
@@ -159,8 +156,7 @@ show ip ospf neighbor
 show ip ospf neighbor
 ```
 Результа:   
-![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/LAB%210.1/JPG/05.jpg)   
-
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/LAB%201.10/JPG/05.jpg)
 ### 2.7 Проверка связности  
 
 На R2:
@@ -168,8 +164,7 @@ show ip ospf neighbor
 ping 192.168.1.1
 ```
 Результа:   
-![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/LAB%210.1/JPG/06.jpg)   
-
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/LAB%201.10/JPG/06.jpg)
 ## ЧАСТЬ 3: Оптимизация и проверка конфигурации OSPFv2 для одной области
 
 ### 3.1 Установка приоритета OSPF на R1
@@ -228,5 +223,39 @@ exit
 exit
 ```
 
-**Что происходит:** После выполнения команды на консоли R1 появится сообщение о том, что OSPF изменил свою роль.v
+После выполнения команды на консоли R1 появится сообщение: "Default route without gateway, if not a point-to-point interface, may impact performance" - "Маршрут по умолчанию без шлюза, если он не имеет интерфейса "точка-точка", может повлиять на производительность"
+
+### 3.4 Объявления Loopback1 на R1
+
+```cisco
+configure terminal
+
+interface Loopback1
+ip ospf network point-to-point
+exit
+
+exit
+```
+### 3.6 Изменение базовой пропускной способности 
+
+Изменение базовой пропускной способности OSPF с 100 Мбит/с на 1 Гбит/с:
+
+```cisco
+configure terminal
+
+router ospf 56
+auto-cost reference-bandwidth 1000
+exit
+
+exit
+
+clear ip ospf process
+```
+
+После выполнения команды на появится предупреждающие сообщение: "% OSPF: Reference bandwidth is changed.
+        Please ensure reference bandwidth is consistent across all routers." - "% OSPF: Опорная полоса пропускания изменена.
+        Пожалуйста, убедитесь, что опорная полоса пропускания одинакова для всех маршрутизаторов."
+
+---
+
 
