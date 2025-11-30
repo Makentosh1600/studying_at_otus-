@@ -2,7 +2,9 @@
 
 ## Сетевая топология   
 
-![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/LAB%210.1/JPG/01.jpg)    
+
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/LAB%201.10/JPG/01.jpg)
+
 
 ## Таблица адресации
 
