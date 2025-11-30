@@ -124,4 +124,33 @@ exit
 
 exit
 ```
+### 2.5 Проверка формирования смежности OSPF
+
+На обоих маршрутизаторах выполняем:
+
+```cisco
+show ip ospf neighbor
+```
+Результат для R1:
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/LAB%210.1/JPG/03.jpg)    
+
+Результат для R2:
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/LAB%210.1/JPG/04.jpg)    
+
+#### Контрольный вопрос
+
+**Какой маршрутизатор является DR (Designated Router)? Какой является BDR (Backup Designated Router)? Каковы критерии отбора?**
+
+<details>
+<summary>Подсказка</summary>
+
+Критерии выбора DR/BDR:
+1. **Приоритет интерфейса** (по умолчанию 1, диапазон 0-255)
+2. **IP-адрес маршрутизатора** (выше приоритет имеет большее значение)
+3. **Router ID** (если IP-адреса не совпадают)
+
+В данном случае оба маршрутизатора имеют приоритет 1, поэтому выбор основан на Router ID:
+- R1 имеет Router ID 1.1.1.1 → BDR
+- R2 имеет Router ID 2.2.2.2 → DR
+</details>
 
