@@ -252,10 +252,31 @@ exit
 clear ip ospf process
 ```
 
-После выполнения команды на появится предупреждающие сообщение: "% OSPF: Reference bandwidth is changed.
+После выполнения команды появилось предупреждающие сообщение: "% OSPF: Reference bandwidth is changed.
         Please ensure reference bandwidth is consistent across all routers." - "% OSPF: Опорная полоса пропускания изменена.
         Пожалуйста, убедитесь, что опорная полоса пропускания одинакова для всех маршрутизаторов."
 
 ---
+
+### 3.7: Проверка приоритета и таймеров на R1
+
+```cisco
+show ip ospf interface G0/1
+```
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/LAB%201.10/JPG/07.jpg)
+
+### 3.8: Проверка таблицы маршрутизации на R1
+```cisco
+show ip route ospf
+```
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/LAB%201.10/JPG/08.jpg)
+
+
+
+
+
+
+
+
 
 
