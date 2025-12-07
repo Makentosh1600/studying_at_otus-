@@ -112,6 +112,12 @@ interface range f0/2-4, f0/7-24, g0/1-2
  switchport mode access
  switchport access vlan 999
  shutdown
+exit
+Interface f0/6
+switchport mode access
+switchport access vlan 30
+switchport nonegotiate
+
 ```
 
 Для S2:
@@ -120,11 +126,20 @@ interface range f0/2-4, f0/6-17, f0/19-24, g0/1-2
  switchport mode access
  switchport access vlan 999
  shutdown
+exit
+Interface f0/18
+switchport mode access
+switchport access vlan 40
+switchport nonegotiate
+
 ```
 ### 2.4 Проверка настройки VLAN и интерфейсов на коммутаторах (R1 и R2)   
-Для S1:
-![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.11/JPG/03.jpg)
-Для S2:
+Для S1:  
+
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.11/JPG/03.jpg)   
+
+Для S2:   
+
 ![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.11/JPG/04.jpg)
 
 ### 2.5 Настройка магистральных интерфейсов F0/1 на коммутаторах (R1 и R2)    
@@ -132,20 +147,15 @@ interface range f0/2-4, f0/6-17, f0/19-24, g0/1-2
 interface f0/1
  switchport mode trunk
  switchport trunk native vlan 1000
- switchport trunk allowed vlan 10,20,30,1000
+ switchport trunk allowed vlan 20,30,40,1000
 ```
-Проверка настройки командой show interfaces trunk
-Для S1:
-![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.11/JPG/08.jpg)
-Для S2:
-![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.11/JPG/09.jpg)   
 
 ### 2.6 Настройка магистральных интерфейсов F0/5 на коммутаторах (R1 и R2) 
 ```
 interface f0/5
  switchport mode trunk
  switchport trunk native vlan 1000
- switchport trunk allowed vlan 10,20,30,1000
+ switchport trunk allowed vlan 20,30,40,1000
 ```
 Проверка настройки командой show interfaces trunk
 Для S1:
@@ -175,7 +185,7 @@ interface g0/1.1000
  encapsulation dot1q 1000 native
  description Native VLAN
 ```
-! Настройка Loopback  
+Настройка Loopback  
 ```
 interface loopback1
  ip address 172.16.1.1 255.255.255.0
