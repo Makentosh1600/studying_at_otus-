@@ -77,7 +77,7 @@ exit
 copy running-config startup-config
 ```
 ## ЧАСТЬ 2. Настройка сетей VLAN на коммутаторах
-### 2.1 Создание сетей VLAN на коммутаторах (R1 и R2)
+### 2.1 Создание сетей VLAN на коммутаторах (S1 и S2)
 ```
 vlan 20
  name Management
@@ -90,7 +90,7 @@ vlan 999
 vlan 1000
  name Native
 ```
-### 2.2 Настройка интерфейсов управления и шлюзов по умолчанию на коммутаторах (R1 и R2)   
+### 2.2 Настройка интерфейсов управления и шлюзов по умолчанию на маршрутизаторов (S1 и S2)   
 Для S1:
 ```
 interface vlan 20
@@ -105,7 +105,7 @@ interface vlan 20
  exit
 ip default-gateway 10.20.0.1
 ```
-### 2.3 Назначение не используемых портов на коммутаторах (R1 и R2)
+### 2.3 Назначение не используемых портов на коммутаторах (S1 и S2)
 Для S1:
 ```
 interface range f0/2-4, f0/7-24, g0/1-2
@@ -133,7 +133,7 @@ switchport access vlan 40
 switchport nonegotiate
 
 ```
-### 2.4 Проверка настройки VLAN и интерфейсов на коммутаторах (R1 и R2)   
+### 2.4 Проверка настройки VLAN и интерфейсов на коммутаторах (S1 и S2)   
 Для S1:  
 
 ![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.11/JPG/03.jpg)   
@@ -142,7 +142,7 @@ switchport nonegotiate
 
 ![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.11/JPG/04.jpg)
 
-### 2.5 Настройка магистральных интерфейсов F0/1 на коммутаторах (R1 и R2)    
+### 2.5 Настройка магистральных интерфейсов F0/1 на коммутаторах (S1 и S2)    
 ```
 interface f0/1
  switchport mode trunk
@@ -150,7 +150,7 @@ interface f0/1
  switchport trunk allowed vlan 20,30,40,1000
 ```
 
-### 2.6 Настройка магистральных интерфейсов F0/5 на коммутаторах (R1 и R2) 
+### 2.6 Настройка магистральных интерфейсов F0/5 на коммутаторах (S1 и S2) 
 ```
 interface f0/5
  switchport mode trunk
@@ -164,7 +164,7 @@ interface f0/5
 ![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.11/JPG/09.jpg)   
 
 ## ЧАСТЬ 3. Настройка маршрутизаторов 
-### 3.1 Настройка маршрутизатора S1
+### 3.1 Настройка маршрутизатора R1
 ```
 interface g0/1
  no shutdown
@@ -193,7 +193,7 @@ interface loopback1
 Проверка настройки командой show ip interfaces brief
 ![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.11/JPG/07.jpg)   
 
-### 3.2 Настройка маршрутизатора S2
+### 3.2 Настройка маршрутизатора R2
 ```
 interface g0/1
  ip address 10.20.0.4 255.255.255.0
@@ -204,9 +204,10 @@ ip route 0.0.0.0 0.0.0.0 10.20.0.1
 ## ЧАСТЬ 4. Настройка удаленого доступа
 ### 4.1 Настройка SSH на всех сетевых устройствах 
 ```
+ip ssh version 2
 username SSHadmin secret $cisco123!
 ip domain-name ccna-lab.com
-crypto key generate rsa modulus 1024
+crypto key generate rsa general-keys modulus 1024
 line vty 0 4
  transport input ssh
  login local
