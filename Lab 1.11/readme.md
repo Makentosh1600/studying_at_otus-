@@ -219,3 +219,17 @@ ip http authentication local
 ```
 ! Комманды не подерживаются CPT (((
 
+## ЧАСТЬ 5. Настройка и проверка списков контроля доступа (ACL)
+### 5.1 Политика 1
+Настраиваем на R1:
+```
+ip access-list extended BLOCK_SALES_SSH
+ deny tcp 10.40.0.0 0.0.0.255 10.20.0.0 0.0.0.255 eq 22
+ permit ip any any
+interface G0/1.40
+ ip access-group BLOCK_SALES_SSH in
+
+```
+
+
+
