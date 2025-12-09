@@ -220,16 +220,50 @@ ip http authentication local
 ! Комманды не подерживаются CPT (((
 
 ## ЧАСТЬ 5. Настройка и проверка списков контроля доступа (ACL)
-### 5.1 Политика 1
+### 5.1 Политика 1, 2, 3
 Настраиваем на R1:
 ```
-ip access-list extended BLOCK_SALES_SSH
- deny tcp 10.40.0.0 0.0.0.255 10.20.0.0 0.0.0.255 eq 22
- permit ip any any
-interface G0/1.40
- ip access-group BLOCK_SALES_SSH in
+ip access-list extended BLOCK
+remark BLOCK_SALES_SSH
+deny tcp 10.40.0.0 0.0.0.255 10.20.0.0 0.0.0.255 eq 22
+remark BLOCK_SALES_WEB
+deny tcp 10.40.0.0 0.0.0.255 10.20.0.0 0.0.0.255 eq 80
+ deny tcp 10.40.0.0 0.0.0.255 10.20.0.0 0.0.0.255 eq 443
+ deny tcp 10.40.0.0 0.0.0.255 host 10.30.0.1 eq 80
+ deny tcp 10.40.0.0 0.0.0.255 host 10.30.0.1 eq 443
+remark BLOCK_ICMP_Sales
+deny icmp 10.40.0.0 0.0.0.255 10.30.0.0 0.0.0.255 echo
+deny icmp 10.40.0.0 0.0.0.255 10.20.0.0 0.0.0.255 echo
 
+permit icmp any any
+permit ip any any
+exit
+interface G0/1.40
+ ip access-group BLOCK in
 ```
+### 5.2 Политика 4
+Настраиваем на R1:
+```
+ip access-list extended BLOCK_ICMP_Operations
+remark BLOCK_ICMP_Operations
+deny icmp 10.30.0.0 0.0.0.255 10.40.0.0 0.0.0.255 echo
+permit icmp any any
+exit
+interface G0/1.30
+ip access-group BLOCK_ICMP_Operations in
+```
+### 5.3 Проверка 
+Шаблон проверки    
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.11/JPG/11.jpg)     
+Проверка Ping от PC-A    
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.11/JPG/10.jpg)    
+Проверка Ping от PC-B
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.11/JPG/12.jpg)     
+Проверка доступа по протокулу SSH от PC-B     
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.11/JPG/13.jpg)    
+
+
+
 
 
 
