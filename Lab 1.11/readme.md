@@ -257,7 +257,8 @@ ip access-group BLOCK_ICMP_Operations in
 ![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.11/JPG/11.jpg)     
 Проверка Ping от PC-A    
 ![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.11/JPG/10.jpg)    
-Проверка Ping от PC-B
+Проверка Ping от PC-B     
+
 ![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.11/JPG/12.jpg)     
 Проверка доступа по протокулу SSH от PC-B     
 ![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.11/JPG/13.jpg)    
