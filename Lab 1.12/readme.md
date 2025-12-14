@@ -90,3 +90,15 @@ interface range f0/2-17, f0/19-24, g0/1-2
  shutdown
 write memory
 ```
+## Часть 2. Настройка и проверка NAT для IPv4   
+### Шаг 2.1. Настройка NAT на R1, используя пул из трех адресов 209.165.200.226 - 209.165.200.228  
+```
+access-list 1 permit 192.168.1.0 0.0.0.255
+ip nat pool PUBLIC_ACCESS 209.165.200.226 209.165.200.228 netmask 255.255.255.248
+ip nat inside source list 1 pool PUBLIC_ACCESS
+interface g0/1
+ ip nat inside
+interface g0/0
+ ip nat outside
+```
+### Шаг 2.2. Проверка конфигурации   
