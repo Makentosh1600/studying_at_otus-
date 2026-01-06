@@ -117,3 +117,33 @@ interface g0/0
 - 209.165.200.226
 #### Какой тип адреса NAT является переведенным адресом?
 - 192.168.1.3
+### Шаг 2.3. Переполнение таблица выдачи IP адресов под NAT
+С **PC-A** выполним ping до `209.165.200.1`.
+С **S1** выполним ping до `209.165.200.1`.
+С **S2** выполним ping до `209.165.200.1`.    
+Комманда ping выполняется. При попытке выполнить на **PC-B** команда не выполнена    
+![Топология сети](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.12/JPG/05.jpg) 
+Проверка таблицы NAT:    
+![Топология сети](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.12/JPG/04.jpg)    
+
+Команда **show ip nat translations verbose** не выполняется в CPT
+Команда **clear ip nat statistics** не выполняется в CPT
+
+Командой clear ip nat translation * выполняем очистку таблиции NAT
+
+## Часть 3: Настройка и проверка PAT для IPv4  
+### Шаг 3.1. Переход от NAT к PAT (Address Pool) 
+Удаляем старые настройки NAT на R1:
+```cisco
+no ip nat inside source list 1 pool PUBLIC_ACCESS
+```
+Добавляем настройку с ключевым словом **overload** (PAT):
+```cisco
+R1(config)# ip nat inside source list 1 pool PUBLIC_ACCESS overload
+```
+
+
+
+
+
+
