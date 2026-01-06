@@ -54,6 +54,12 @@ interface g0/0
 ip route 0.0.0.0 0.0.0.0 209.165.200.230
 write memory
 ```
+Настройка Loopback  
+```
+interface loopback1
+ ip address 209.165.200.1 255.255.255.224
+```
+
 ### Шаг 1.3. Базовая настройка коммутаторов (S1, S2)   
 ```
 hostname S1 (для второго S2)
