@@ -45,6 +45,8 @@ interface g0/0
 interface g0/1
  ip address 192.168.1.1 255.255.255.0
  no shutdown
+ exit
+ip route 209.165.200.0 255.255.255.224 209.165.200.225
 ```
 Для R2:   
 ```
