@@ -139,9 +139,21 @@ no ip nat inside source list 1 pool PUBLIC_ACCESS
 ```
 Добавляем настройку с ключевым словом **overload** (PAT):
 ```cisco
-R1(config)# ip nat inside source list 1 pool PUBLIC_ACCESS overload
+ip nat inside source list 1 pool PUBLIC_ACCESS overload
 ```
+**Проверка**: Запустите ping с PC-A и PC-B одновременно. Проверка таблица NAT:   
+![Топология сети](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.12/JPG/06.jpg)    
 
+#### Во что был транслирован внутренний локальный адрес PC-B?   
+- 209.165.200.226:Port
+#### Какой тип адреса NAT является переведенным адресом?
+- 192.168.1.3
+#### Чем отличаются выходные данные команды show ip nat translations из упражнения NAT?   
+- формат `IP:Port`
+#### Как маршрутизатор отслеживает, куда идут ответы? 
+- по `IP:Port` по **Port** 
+
+### Шаг 3.2. Переход к PAT (Interface Overload)
 
 
 
