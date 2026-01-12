@@ -122,9 +122,9 @@ interface g0/0
 С **S1** выполним ping до `209.165.200.1`.
 С **S2** выполним ping до `209.165.200.1`.    
 Комманда ping выполняется. При попытке выполнить на **PC-B** команда не выполнена    
-![Топология сети](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.12/JPG/05.jpg) 
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.12/JPG/05.jpg) 
 Проверка таблицы NAT:    
-![Топология сети](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.12/JPG/04.jpg)    
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.12/JPG/04.jpg)    
 
 Команда **show ip nat translations verbose** не выполняется в CPT
 Команда **clear ip nat statistics** не выполняется в CPT
@@ -142,7 +142,7 @@ no ip nat inside source list 1 pool PUBLIC_ACCESS
 ip nat inside source list 1 pool PUBLIC_ACCESS overload
 ```
 **Проверка**: Запустите ping с PC-A и PC-B одновременно. Проверка таблица NAT:   
-![Топология сети](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.12/JPG/06.jpg)    
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.12/JPG/06.jpg)    
 
 #### Во что был транслирован внутренний локальный адрес PC-B?   
 - 209.165.200.226:Port
@@ -154,6 +154,28 @@ ip nat inside source list 1 pool PUBLIC_ACCESS overload
 - по `IP:Port` по **Port** 
 
 ### Шаг 3.2. Переход к PAT (Interface Overload)
+Удаляем старые настройки NAT на R1:
+```cisco
+no ip nat inside source list 1 pool PUBLIC_ACCESS overload
+no ip nat pool PUBLIC_ACCESS
+```
+Добавляем настройку для настройки PAT (Interface Overload) (PAT):
+```cisco
+ip nat inside source list 1 interface g0/0 overload
+```
+## Часть 4: Настройка статического NAT   
+Настройка статического NAT для PC-A на R1:
+```cisco 
+ip nat inside source static 192.168.1.2 209.165.200.229 
+```
+**Проверка**:  
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.12/JPG/07.jpg)   
+
+Пинг с R2 на 209.165.200.229:
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.12/JPG/08.jpg)   
+
+На R1 отобразим таблицу NAT с помощью команды *show ip nat translations*:   
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.12/JPG/09.jpg)    
 
 
 
