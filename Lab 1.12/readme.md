@@ -172,7 +172,7 @@ ip nat inside source static 192.168.1.2 209.165.200.229
 **Проверка**:  
 ![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.12/JPG/07.jpg)   
 
-Пинг с R2 на 209.165.200.229:    
+Пинг с R2 на 209.165.200.229:         
 
 ![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.12/JPG/08.jpg)   
 
