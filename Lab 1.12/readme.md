@@ -122,7 +122,8 @@ interface g0/0
 С **S1** выполним ping до `209.165.200.1`.
 С **S2** выполним ping до `209.165.200.1`.    
 Комманда ping выполняется. При попытке выполнить на **PC-B** команда не выполнена    
-![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.12/JPG/05.jpg) 
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.12/JPG/05.jpg)     
+
 Проверка таблицы NAT:    
 ![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.12/JPG/04.jpg)    
 
@@ -171,7 +172,8 @@ ip nat inside source static 192.168.1.2 209.165.200.229
 **Проверка**:  
 ![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.12/JPG/07.jpg)   
 
-Пинг с R2 на 209.165.200.229:
+Пинг с R2 на 209.165.200.229:    
+
 ![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.12/JPG/08.jpg)   
 
 На R1 отобразим таблицу NAT с помощью команды *show ip nat translations*:   
