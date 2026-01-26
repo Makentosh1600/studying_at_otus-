@@ -108,4 +108,150 @@ R1# show cdp interface
 **ОТВЕТ R1:**    
 ![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.13/JPG/03.jpg)    
 
+**Команда:**
+```cisco
+R1# show cdp interface neighbors
+```
+**ОТВЕТ R1:**    
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.13/JPG/04.jpg)    
+
+**Команда:**
+```cisco
+R1# show cdp entry S1
+```
+**ОТВЕТ R1:**    
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.13/JPG/05.jpg)   
+
+**Версия IOS на S1 - Version 15.0(2)SE4**    
+
+**Команда:**
+```cisco
+R1# show cdp traffic
+```
+**Команда CPT не подерживается (((**    
+
+По команде **show cdp entry S1** дополнительнь становится известно о типе и модели подключенного устройства, порт подключения к оборудованию с которого производится запрос, IP адрес.
+
+**Команда для отключения CDP глобально:**
+```cisco
+R1(config)# no cdp run
+```
+## Часть 3. Обнаружение сетевых ресурсов с помощью протокола LLDP
+
+### Шаг 1: Включение LLDP на всех устройствах
+**На R1:**
+```cisco
+R1# configure terminal
+R1(config)# lldp run
+R1(config)# exit
+```
+
+**На S1:**
+```cisco
+S1# configure terminal
+S1(config)# lldp run
+S1(config)# exit
+```
+
+**На S2:**
+```cisco
+S2# configure terminal
+S2(config)# lldp run
+S2(config)# exit
+```
+### Шаг 2: Получение детальной информации о S2 с коммутатора S1
+
+**Команда:**
+```cisco
+S1# show lldp entry S2
+```
+**Вопрос: Что такое chassis ID для коммутатора S2**   
+*Ответ: Это уникальный идентификатьр, который используется для однозначного определения физического устройства в сети.*
+
+### Шаг 3: Просмотр физической топологии с помощью LLDP
+
+**На R1:**
+```cisco
+R1# show lldp neighbors
+```
+**ОТВЕТ R1:**   
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.13/JPG/06.jpg)     
+
+**На S1:**
+```cisco
+S1# show lldp neighbors
+```
+**ОТВЕТ S1:**   
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.13/JPG/07.jpg)      
+
+**На S2:**
+```cisco
+S2# show lldp neighbors
+```
+**ОТВЕТ S2:**   
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.13/JPG/08.jpg)      
+
+**Топология, построенная на основе LLDP:**
+```
+R1 (Gi0/0/1) <---> (Fa0/5) S1 (Fa0/1) <---> (Fa0/1) S2
+```
+
+---
+## Часть 4. Настройка и проверка NTP
+
+### Шаг 1: Вывод текущего времени на R1
+
+**Команда:**
+```cisco
+R1# show clock
+```
+**ОТВЕТ:**
+```
+*2:53:39.19 UTC Mon Mar 1 1993
+```
+**Таблица текущего времени:**
+
+| Дата | Время | Часовой пояс | Источник времени |
+|------|-------|--------------|------------------|
+| Mon Mar 1 1993 | 02:53:39.19 | UTC | Внутренние часы (не синхронизированы) |   
+
+### Шаг 2: Установка времени на R1
+
+**Команда:**
+```cisco
+R1# clock set 21:50:00 26 January 2026
+```
+**Проверка:**
+```cisco
+R1# show clock
+```
+**Вывод:**
+```
+21:50:41.159 UTC Mon Jan 26 2026
+```
+### Шаг 3: Настройка R1 как NTP-сервера
+
+**Команда:**
+```cisco
+R1# configure terminal
+R1(config)# ntp master 4
+R1(config)# exit
+```
+
+**Проверка:**
+```cisco
+R1# show ntp status
+```
+
+**ОТВЕТ R1:**   
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.13/JPG/09.jpg)  
+
+
+
+
+
+
+
+
+
 
