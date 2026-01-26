@@ -105,5 +105,7 @@ S2# copy running-config startup-config
 ```cisco
 R1# show cdp interface
 ```
-**ОТВЕТ R1:**
+**ОТВЕТ R1:**    
+![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.13/JPG/03.jpg)    
+
 
