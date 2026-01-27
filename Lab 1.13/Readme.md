@@ -246,6 +246,169 @@ R1# show ntp status
 **ОТВЕТ R1:**   
 ![](https://github.com/Makentosh1600/studying_at_otus-/blob/main/Lab%201.13/JPG/09.jpg)  
 
+### Шаг 4: Просмотр времени на S1 и S2 до настройки NTP
+
+**На S1:**
+```cisco
+S1# show clock
+```
+
+**Пример вывода:**
+```
+*11:39:35.668 UTC Tue Mar 2 1993
+```
+
+**На S2:**
+```cisco
+S2# show clock
+```
+
+**Пример вывода:**
+```
+*11:39:57.955 UTC Tue Mar 2 1993
+```
+
+**Таблица времени до настройки NTP:**
+
+| Устройство | Дата | Время | Часовой пояс |
+|------------|------|-------|--------------|
+| S1 | Mon Mar 2 1993 | 11:39:35.668 | UTC |
+| S2 | Mon Mar 2 1993 | 11:39:57.955 | UTC |      
+### Шаг 5: Настройка S1 и S2 как NTP-клиентов
+
+**На S1:**
+```cisco
+S1# configure terminal
+S1(config)# ntp server 10.22.0.1
+S1(config)# ntp update-calendar
+S1(config)# exit
+```
+
+**На S2:**
+```cisco
+S2# configure terminal
+S2(config)# ntp server 10.22.0.1
+S2(config)# ntp update-calendar
+S2(config)# exit
+```
+**Команда ntp update-calendar в CPT не подерживается**
+
+### Шаг 6: Проверка синхронизации NTP
+
+**На S1:**
+```cisco
+S1# show ntp status
+```
+
+**Ответ S1:**
+```
+Clock is synchronized, stratum 16, reference is 10.22.0.1
+nominal freq is 250.0000 Hz, actual freq is 249.9990 Hz, precision is 2**24
+reference time is 2AD1E2C7.0000017C (1:30:47.380 UTC Thu Dec 26 2058)
+clock offset is 0.00 msec, root delay is 0.00  msec
+root dispersion is 10.00 msec, peer dispersion is 0.12 msec.
+loopfilter state is 'CTRL' (Normal Controlled Loop), drift is - 0.000001193 s/s system poll interval is 4, last update was 4 sec ago.
+```
+
+**На S2:**
+```cisco
+S2# show ntp status
+```
+
+**Ответ S2:**
+```
+Clock is synchronized, stratum 16, reference is 10.22.0.1
+nominal freq is 250.0000 Hz, actual freq is 249.9990 Hz, precision is 2**24
+reference time is 2AD1E30E.0000005E (1:31:58.094 UTC Thu Dec 26 2058)
+clock offset is 0.00 msec, root delay is 0.00  msec
+root dispersion is 10.72 msec, peer dispersion is 0.12 msec.
+loopfilter state is 'CTRL' (Normal Controlled Loop), drift is - 0.000001193 s/s system poll interval is 4, last update was 13 sec ago.
+```
+
+**Проверка ассоциаций NTP:**
+
+**На S1:**
+```cisco
+S1# show ntp associations
+```
+
+**Пример вывода:**
+```
+  address         ref clock       st   when   poll reach  delay  offset   disp
+*~10.22.0.1       127.127.1.1     4     23     64   377   2.17   2.45     1.89
+ * sys.peer, # selected, + candidate, - outlyer, x falseticker, ~ configured
+```
+
+**На S2:**
+```cisco
+S2# show ntp associations
+```
+
+**Пример вывода:**
+```
+  address         ref clock       st   when   poll reach  delay  offset   disp
+*~10.22.0.1       127.127.1.1     4     31     64   377   2.28   3.12     2.05
+ * sys.peer, # selected, + candidate, - outlyer, x falseticker, ~ configured
+```
+
+**Интерпретация:**
+- Символ `*` (звездочка) перед IP-адресом указывает, что устройство синхронизировано с этим сервером
+- Символ `~` (тильда) указывает, что сервер был настроен вручную
+- **stratum 5** означает, что коммутаторы находятся на 5-м уровне иерархии NTP (R1 имеет stratum 4)
+
+### Шаг 7: Проверка синхронизированного времени
+
+**На S1:**
+```cisco
+S1# show clock
+```
+
+**Пример вывода:**
+```
+15:36:45.123 UTC Tue Jan 13 2026
+```
+
+**На S2:**
+```cisco
+S2# show clock
+```
+
+**Пример вывода:**
+```
+15:36:47.456 UTC Tue Jan 13 2026
+```
+
+**Таблица времени после настройки NTP:**
+
+| Устройство | Дата | Время | Часовой пояс | Источник |
+|------------|------|-------|--------------|----------|
+| S1 | Tue Jan 13 2026 | 15:36:45.123 | UTC | NTP (10.22.0.1) |
+| S2 | Tue Jan 13 2026 | 15:36:47.456 | UTC | NTP (10.22.0.1) |
+
+**Вывод:** Время на обоих коммутаторах синхронизировано с маршрутизатором R1 через протокол NTP.
+
+---
+
+## Вопрос для повторения
+
+**Для каких интерфейсов в пределах сети не следует использовать протоколы обнаружения сетевых ресурсов? Поясните ответ.**
+
+**Ответ:**
+
+Протоколы обнаружения сетевых ресурсов (CDP и LLDP) **не следует использовать** на следующих типах интерфейсов:
+
+1. **Интерфейсы, подключенные к недоверенным сетям (Internet, публичные сети)**
+   - Причина: Информация, передаваемая через CDP/LLDP (имя устройства, модель, версия ОС, IP-адреса), может быть использована злоумышленниками для разведки сети и планирования атак.
+
+2. **Интерфейсы, подключенные к конечным пользователям**
+   - Причина: Конечным пользователям не нужна информация о сетевой инфраструктуре, а раскрытие таких данных представляет угрозу безопасности.
+
+3. **Пограничные интерфейсы (граница между доверенной и недоверенной зонами)**
+   - Причина: Минимизация утечки информации о внутренней инфраструктуре.
+
+4. **DMZ-интерфейсы**
+   - Причина: Серверы в DMZ могут быть скомпрометированы, поэтому не следует раскрывать информацию о топологии сети.
+
 
 
 
