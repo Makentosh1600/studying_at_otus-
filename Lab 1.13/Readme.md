@@ -332,10 +332,10 @@ loopfilter state is 'CTRL' (Normal Controlled Loop), drift is - 0.000001193 s/s 
 S1# show ntp associations
 ```
 
-**Пример вывода:**
+**Ответ S1:**
 ```
-  address         ref clock       st   when   poll reach  delay  offset   disp
-*~10.22.0.1       127.127.1.1     4     23     64   377   2.17   2.45     1.89
+address         ref clock       st   when     poll    reach  delay          offset            disp
+*~10.22.0.1     127.127.1.1     4    5        16      377    0.00           0.00              0.12
  * sys.peer, # selected, + candidate, - outlyer, x falseticker, ~ configured
 ```
 
@@ -344,17 +344,12 @@ S1# show ntp associations
 S2# show ntp associations
 ```
 
-**Пример вывода:**
+**Ответ S2:**
 ```
-  address         ref clock       st   when   poll reach  delay  offset   disp
-*~10.22.0.1       127.127.1.1     4     31     64   377   2.28   3.12     2.05
+address         ref clock       st   when     poll    reach  delay          offset            disp
+*~10.22.0.1     127.127.1.1     4    13       16      377    1.00           0.00              0.12
  * sys.peer, # selected, + candidate, - outlyer, x falseticker, ~ configured
 ```
-
-**Интерпретация:**
-- Символ `*` (звездочка) перед IP-адресом указывает, что устройство синхронизировано с этим сервером
-- Символ `~` (тильда) указывает, что сервер был настроен вручную
-- **stratum 5** означает, что коммутаторы находятся на 5-м уровне иерархии NTP (R1 имеет stratum 4)
 
 ### Шаг 7: Проверка синхронизированного времени
 
@@ -363,9 +358,9 @@ S2# show ntp associations
 S1# show clock
 ```
 
-**Пример вывода:**
+**Ответ S1:**
 ```
-15:36:45.123 UTC Tue Jan 13 2026
+6:54:43.451 UTC Wed Jan 28 2026
 ```
 
 **На S2:**
@@ -375,15 +370,15 @@ S2# show clock
 
 **Пример вывода:**
 ```
-15:36:47.456 UTC Tue Jan 13 2026
+6:55:22.359 UTC Wed Jan 28 2026
 ```
 
 **Таблица времени после настройки NTP:**
 
 | Устройство | Дата | Время | Часовой пояс | Источник |
 |------------|------|-------|--------------|----------|
-| S1 | Tue Jan 13 2026 | 15:36:45.123 | UTC | NTP (10.22.0.1) |
-| S2 | Tue Jan 13 2026 | 15:36:47.456 | UTC | NTP (10.22.0.1) |
+| S1 | Tue Jan 28 2026 | 6:54:43.451 | UTC | NTP (10.22.0.1) |
+| S2 | Tue Jan 28 2026 | 6:55:22.359 | UTC | NTP (10.22.0.1) |
 
 **Вывод:** Время на обоих коммутаторах синхронизировано с маршрутизатором R1 через протокол NTP.
 
